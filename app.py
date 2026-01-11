@@ -1,3 +1,7 @@
+"""
+Simple chat app with memory
+"""
+
 from google import genai
 from google.genai import types
 
@@ -27,7 +31,7 @@ def model_call(client, contents):
 
 
 def main():
-    contents = []
+    memory = []
     client = genai.Client(api_key=GEMINI_API_KEY)
 
     while True:
@@ -40,12 +44,12 @@ def main():
             role="user",
             parts=[types.Part.from_text(text=query)]
         )
-        contents.append(user_content)
-        response = model_call(client, contents)
+        memory.append(user_content)
+        response = model_call(client, memory)
 
         if response.function_calls:
-            handle_tool_call(response, contents)
-            response = model_call(client, contents)
+            handle_tool_call(response, memory)
+            response = model_call(client, memory)
 
         print(f"Model: {response.text}")
     

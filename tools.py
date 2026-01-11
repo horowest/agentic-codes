@@ -19,7 +19,7 @@ def call_function(name, args):
     return { "result": result }
 
 
-def handle_tool_call(response, contents):
+def handle_tool_call(response, memory):
     func_call_part = response.function_calls[0]
     func_call_content = response.candidates[0].content
     func_name = func_call_part.name
@@ -35,7 +35,7 @@ def handle_tool_call(response, contents):
         parts=[func_response_part]
     )
 
-    contents.extend([func_call_content, func_response_content])
+    memory.extend([func_call_content, func_response_content])
 
 
 def main():
