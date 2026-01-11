@@ -1,0 +1,45 @@
+candidates=[
+    Candidate(
+      content=Content(
+        parts=[
+          Part(
+            function_call=FunctionCall(
+              args=<... Max depth ...>,
+              name=<... Max depth ...>
+            ),
+            thought_signature=b"\n\x99\x02\x01r\xc8\xda|\x98\xc4\xfcU\x93\xb2\x80\x929w\xdcg\x810\xcf\xc7\xed\xa9p\x10#A'8JAy\xf5\x84t\x7f\x14m\xaa\n\xb3-x\x14\x8c\xed\xc8\xa2I\x13a\xbd\x01\xc1\x88C\x19\xb0\xe6l\x0cQ\x07\x95Y\xd0\xf8qj\xcf\x00`\xffX\xcc\x11\x07LzV11\x18\xbds\x01\ry$s+]\xb4\xa0...'
+          ),
+        ],
+        role='model'
+      ),
+      finish_reason=<FinishReason.STOP: 'STOP'>,
+      index=0
+    ),
+  ],
+  model_version='gemini-2.5-flash',
+  response_id='XixjabK8H7qvg8UPp7ODsA4',
+  sdk_http_response=HttpResponse(
+    headers=<dict len=11>
+  ),
+
+
+  GenerateContentResponse(
+  candidates=[
+    Candidate(
+      content=Content(
+        parts=[
+          Part(
+            text='The weather in Boston, MA is sunny.'
+          ),
+        ],
+        role='model'
+      ),
+      finish_reason=<FinishReason.STOP: 'STOP'>,
+      index=0
+    ),
+  ],
+  model_version='gemini-2.5-flash',
+  response_id='gixjadXSMKS-g8UP0L_MuQ4',
+  sdk_http_response=HttpResponse(
+    headers=<dict len=11>
+  )
