@@ -1,6 +1,8 @@
 from google import genai
 from google.genai import types
 
+from tools import handle_tool_call, get_current_weather
+
 
 GEMINI_API_KEY = ""
 GEMINI_MODEL = "gemini-2.5-flash-lite"
@@ -8,6 +10,21 @@ GEMINI_MODEL = "gemini-2.5-flash-lite"
 SYSTEM_INSTRUCTIONS = """
 You're an assistant. Answer questions in a funny way. Keep your responses short and simple."
 """
+
+
+def model_call(client, contents):
+    return client.models.generate_content(
+        model=GEMINI_MODEL,
+        contents=contents,
+        config=types.GenerateContentConfig(
+            system_instruction=SYSTEM_INSTRUCTIONS,
+            tools=[get_current_weather],
+            automatic_function_calling=types.AutomaticFunctionCallingConfig(
+                disable=True
+            )
+        )
+    )
+
 
 def main():
     contents = []
@@ -24,14 +41,11 @@ def main():
             parts=[types.Part.from_text(text=query)]
         )
         contents.append(user_content)
+        response = model_call(client, contents)
 
-        response = client.models.generate_content(
-            model=GEMINI_MODEL,
-            contents=contents,
-            config=types.GenerateContentConfig(
-                system_instruction=SYSTEM_INSTRUCTIONS
-            )
-        )
+        if response.function_calls:
+            handle_tool_call(response, contents)
+            response = model_call(client, contents)
 
         print(f"Model: {response.text}")
     
