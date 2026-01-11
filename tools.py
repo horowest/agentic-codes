@@ -1,8 +1,6 @@
 from google import genai
 from google.genai import types
 
-GEMINI_API_KEY = ""
-
 
 def get_current_weather(location: str) -> str:
     """Returns the current weather.

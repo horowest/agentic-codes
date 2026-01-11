@@ -2,15 +2,15 @@
 Simple chat app with memory
 """
 
+from dotenv import load_dotenv
 from google import genai
 from google.genai import types
-
 from tools import handle_tool_call, get_current_weather
 
 
-GEMINI_API_KEY = ""
-GEMINI_MODEL = "gemini-2.5-flash-lite"
+load_dotenv()
 
+GEMINI_MODEL = "gemini-2.5-flash-lite"
 SYSTEM_INSTRUCTIONS = """
 You're an assistant. Answer questions in a funny way. Keep your responses short and simple."
 """
@@ -32,7 +32,7 @@ def model_call(client, contents):
 
 def main():
     memory = []
-    client = genai.Client(api_key=GEMINI_API_KEY)
+    client = genai.Client()
 
     while True:
         query = input("User: ")

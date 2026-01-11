@@ -1,10 +1,10 @@
 from google import genai
 from google.genai import types
 
-GEMINI_API_KEY = ""
+
 GEMINI_MODEL = "gemini-2.5-flash"
 
-with genai.Client(api_key=GEMINI_API_KEY) as client:
+with genai.Client() as client:
     # response = client.models.generate_content(
     #     model=GEMINI_MODEL,
     #     contents="Tell a joke",
